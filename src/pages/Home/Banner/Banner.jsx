@@ -12,10 +12,10 @@ const Banner = () => {
     return (
         <Carousel className='text-center'>
             <div>
-                <img src={img1} />
+                <img src={img6} />
             </div>
             <div>
-                <img src={img2} />
+                <img src={img1} />
             </div>
             <div>
                 <img src={img3} />
@@ -27,7 +27,7 @@ const Banner = () => {
                 <img src={img5} />
             </div>
             <div>
-                <img src={img6} />
+                <img src={img2} />
             </div>
         </Carousel>
     );

@@ -7,7 +7,9 @@ const Main = () => {
     return (
         <div>
             <NavBar></NavBar>
-            <Outlet></Outlet>
+           <div className="container mx-auto min-h-screen ">
+             <Outlet></Outlet>
+           </div>
             <Footer></Footer>
         </div>
     );
