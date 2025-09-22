@@ -49,7 +49,7 @@ const Cart = () => {
                     <thead>
                         <tr>
                             <th>
-                                #
+                              Serial
                             </th>
                             <th>Image</th>
                             <th>Name</th>
@@ -79,7 +79,7 @@ const Cart = () => {
                                 <th>
                                     <button
                                         onClick={() => handleDelete(item._id)}
-                                        className="btn btn-ghost btn-lg">
+                                        className="btn btn-ghost btn-sm">
                                         <FaTrashAlt className="text-red-600"></FaTrashAlt>
                                     </button>
                                 </th>
