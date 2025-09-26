@@ -13,6 +13,11 @@ import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../Layout/Dashboard";
 import Cart from "../pages/Dashboard/Cart";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import AddItems from "../pages/Dashboard/AddItems/AddItems";
+import AdminRoute from "./AdminRoute";
+import ManageItems from "../pages/Dashboard/ManageItems/ManageItems";
+import ManageBookings from "../pages/Dashboard/ManageBookings/ManageBookings";
+import UpdatedItems from "../pages/Dashboard/UpdatedItems/UpdatedItems";
 
 
   export const router = createBrowserRouter([
@@ -47,11 +52,29 @@ import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
           path:'cart',
           element: <Cart></Cart>
         },
-        // admin routes
+        // admin only routes
+        {
+          path: 'addItems',
+          element: <AdminRoute><AddItems></AddItems></AdminRoute>
+        },
+        {
+          path: 'manageItems',
+          element:<AdminRoute><ManageItems></ManageItems></AdminRoute>
+          // element:<ManageItems></ManageItems>
+        },
+        {
+          path: 'updatedItems/:id',
+          element:<AdminRoute><UpdatedItems></UpdatedItems></AdminRoute>,
+          loader: ({params})=>fetch(`http://localhost:5000/menu/${params.id}`)
+        },
+        {
+          path:'bookings',
+          element: <AdminRoute><ManageBookings></ManageBookings></AdminRoute>
+        },
         {
           path: 'users',
-          element: <AllUsers></AllUsers>
-        }
+          element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+        },
       ]
     }
     ,
