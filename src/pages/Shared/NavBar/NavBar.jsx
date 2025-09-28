@@ -1,12 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
-import { FiShoppingCart } from "react-icons/fi";
+import { FiShoppingCart, FiUser } from "react-icons/fi";
+import { CiLogout, CiMenuFries } from "react-icons/ci";
 import useCarts from "../../../hooks/useCarts";
 
 const NavBar = () => {
   const { user, LogOut } = useContext(AuthContext);
   const [cart] = useCarts();
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const navOptions = (
     <>
       <li>
@@ -23,10 +25,10 @@ const NavBar = () => {
       </li>
       <li>
         <Link to={"/dashboard/cart"}>
-           <div className="flex gap-2 items-center ">
-             <FiShoppingCart></FiShoppingCart>
-              <div className="badge badge-sm badge-secondary">+{cart.length}</div>
-           </div>
+          <div className="flex gap-2 items-center ">
+            <FiShoppingCart></FiShoppingCart>
+            <div className="badge badge-sm badge-secondary">+{cart.length}</div>
+          </div>
         </Link>
       </li>
 
@@ -49,7 +51,7 @@ const NavBar = () => {
     <>
       <div className=" ">
         <div className="navbar fixed z-20 bg-opacity-30 backdrop-blur-2xl  bg-red-50 text-black md:px-16 ">
-          <div className="navbar-start">
+          <div className="navbar-start ">
             <div className="dropdown ">
               <label tabIndex={0} className="btn btn-ghost lg:hidden">
                 <svg
@@ -87,7 +89,7 @@ const NavBar = () => {
           <div className="navbar-end">
             {user ? (
               <>
-                <img
+                {/* <img
                   src={user.photoURL}
                   className="w-10 h-10 rounded-full mr-2"
                   alt=""
@@ -98,7 +100,51 @@ const NavBar = () => {
                   className="btn btn-md  outline-teal-100"
                 >
                   logOut
-                </Link>
+                </Link> */}
+                {/* user account */}
+                <div className="flex items-center gap-[15px]">
+                  <div
+                    className="flex items-center gap-[10px] cursor-pointer relative"
+                    onClick={() => setAccountMenuOpen(!accountMenuOpen)}
+                  >
+                    <div className="relative">
+                      <img
+                        src={user.photoURL}
+                        alt="avatar"
+                        className="w-[35px] h-[35px] rounded-full object-cover"
+                      />
+                      <div className="w-[10px] h-[10px] rounded-full bg-green-500 absolute bottom-[0px] right-0 border-2 border-white"></div>
+                    </div>
+
+                    <h1 className="text-[1rem] dark:text-[#abc2d3] font-[400] text-gray-600 sm:block hidden">
+                      {user.displayName}
+                    </h1>
+
+                    <div
+                      className={`${
+                        accountMenuOpen
+                          ? "translate-y-0 opacity-100 z-[1]"
+                          : "translate-y-[10px] opacity-0 z-[-1]"
+                      } bg-white w-max rounded-md absolute dark:bg-slate-800 top-[45px] right-0 p-[10px] flex flex-col transition-all duration-300 gap-[5px]`}
+                    >
+                      <p className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] dark:text-[#abc2d3] dark:hover:bg-slate-900/50 text-gray-600 hover:bg-gray-50">
+                        <FiUser />
+                        View Profile
+                      </p>
+
+                      <div className="mt-3 border-t dark:border-slate-700 border-gray-200 pt-[5px]">
+                        <Link
+                          to={"/"}
+                          onClick={handleLogOut}
+                          className="flex items-center gap-[5px] rounded-md p-[8px] pr-[45px] py-[3px] text-[1rem] dark:text-red-500 dark:hover:bg-red-500/20 text-red-500 hover:bg-red-50"
+                        >
+                          <CiLogout />
+                          Logout
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </>
             ) : (
               <>

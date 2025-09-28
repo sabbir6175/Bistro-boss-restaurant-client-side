@@ -8,7 +8,7 @@ import useCarts from "../../hooks/useCarts";
 
 const FoodCard = ({ item }) => {
   // console.log(item);
-  const { name, image, price, recipe, _id } = item;
+  const { name, image, price, category, recipe, _id } = item;
   const { user } = useAuth();
   // console.log(user.email)
   const navigate = useNavigate();
@@ -32,8 +32,10 @@ const FoodCard = ({ item }) => {
         name,
         image,
         price,
+        category,
       };
       const res = await axiosSecure.post("/carts", cartItem);
+      console.log(res.data)
       if (res.data.insertedId) {
         Swal.fire({
           position: "top-end",
