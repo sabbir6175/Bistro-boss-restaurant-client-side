@@ -2,11 +2,13 @@ import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { FiShoppingCart, FiUser } from "react-icons/fi";
-import { CiLogout, CiMenuFries } from "react-icons/ci";
+import { CiLogout } from "react-icons/ci";
 import useCarts from "../../../hooks/useCarts";
+import useAdmin from "../../../hooks/useAdmin";
 
 const NavBar = () => {
   const { user, LogOut } = useContext(AuthContext);
+  const [isAdmin] = useAdmin()
   const [cart] = useCarts();
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
   const navOptions = (
@@ -23,6 +25,19 @@ const NavBar = () => {
       <li>
         <Link to="/secret">Secret</Link>
       </li>
+
+      {
+        user && isAdmin &&  <li>
+        <Link to="/dashboard/adminHome">Dashboard</Link>
+      </li>
+      }
+      {
+        user && !isAdmin &&  <li>
+        <Link to="/dashboard/userHome">Dashboard</Link>
+      </li>
+      }
+
+
       <li>
         <Link to={"/dashboard/cart"}>
           <div className="flex gap-2 items-center ">
