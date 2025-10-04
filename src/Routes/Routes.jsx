@@ -90,7 +90,7 @@ import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
         {
           path: 'updatedItems/:id',
           element:<AdminRoute><UpdatedItems></UpdatedItems></AdminRoute>,
-          loader: ({params})=>fetch(`http://localhost:5000/menu/${params.id}`)
+          loader: ({params})=>fetch(`https://bistro-boss-restaurant-server-side-theta.vercel.app/menu/${params.id}`)
         },
         {
           path:'bookings',
